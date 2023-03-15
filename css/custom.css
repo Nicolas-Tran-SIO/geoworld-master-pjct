@@ -1,7 +1,8 @@
-/* Show it is fixed to the top */
+
 body {
   min-height: 75rem;
   padding-top: 4.5rem;
+  
 }
 
 .footer > .container {
@@ -18,7 +19,7 @@ code {
   height: auto;
   position:relative;
   border:1px solid #BBB;
- // background:#eee;
+  background:#eee;
 }
 
 .ribbon {

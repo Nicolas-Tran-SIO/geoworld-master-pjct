@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ce script est composé de fonctions d'exploitation des données
  * détenues pas le SGBDR MySQL utilisées par la logique de l'application.
@@ -38,7 +39,34 @@ function getAllCountries()
     return $pdo->query($query)->fetchAll();
 }
 
+/** 
+ * Obtenir la liste des noms des Continents
+ * 
+ * @return liste
+ */
+function getNomContinents()
+{
+    global $pdo;
+    $query = 'SELECT DISTINCT(Continent) FROM country;';
+    return $pdo->query($query)->fetchAll();
+}
 
+/**
+ * Obtenir la liste des noms des Capitals
+ * 
+ * @param integer $idCapital le nom de la capitale
+ * 
+ * @return array 
+ */
+function getNomCapital($idCapital)
+{
+    global $pdo;
+    $sql = $pdo->prepare("SELECT city.Name FROM city WHERE id=:idc");
+    $sql->bindParam(':idc', $idCapital, PDO::PARAM_INT);
+    $sql->execute();
+    $nomCapital = $sql->fetchColumn();
+    return $nomCapital;
+}
 
 // Exemple d'une fonction paramétrée, avec documentation technique PhpDoc  
 
@@ -51,6 +79,7 @@ function getAllCountries()
  */
 function getCountriesByContinent($continent)
 {
+
     // pour utiliser la variable globale dans la fonction
     global $pdo;
     $query = 'SELECT * FROM Country WHERE Continent = :cont;';
